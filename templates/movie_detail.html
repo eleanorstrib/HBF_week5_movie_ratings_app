@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2>Movie name placeholder</h2>
+<h2> {{ movie_info[0][0] }}</h2>
 <div class="cart well">
     <h3>Rate this movie</h3>
     <p></p>
-        <form method="POST" action="/addrating">
-            <button type="submit" class="btn btn-default" value=1>1</button>
-            <button type="submit" class="btn btn-default" value=2>2</button>
-            <button type="submit" class="btn btn-default" value=3>3</button>
-            <button type="submit" class="btn btn-default" value=4>4</button>
-            <button type="submit" class="btn btn-default" value=5>5</button>
+        <form method="POST" action="/addrating/{{ movie_info[0][3] }}">
+            <button type="submit" name="rating" class="btn btn-default" value=1>1</button>
+            <button type="submit" name="rating" class="btn btn-default" value=2>2</button>
+            <button type="submit" name="rating" class="btn btn-default" value=3>3</button>
+            <button type="submit" name="rating" class="btn btn-default" value=4>4</button>
+            <button type="submit" name="rating" class="btn btn-default" value=5>5</button>
         </form>
 
 </div>
@@ -18,8 +18,8 @@
 <div class="melon-details">
     <h3>Movie details</h3>
     <ul>
-        <li>Release date: </li>
-        <li>URL: </li>
+        <li>Release date: {{ movie_date }}</li>
+        <li>URL: {{ movie_info[0][2] }} </li>
         
     </ul>
 </div>
