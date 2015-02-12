@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block body %}
+    
+    <h2>User details</h2>
+
+    <ul>
+        <li>User id: {{ this_user.id }}</li>
+        <li>Age: {{ this_user.age }}</li>
+        <li>Zipcode: {{ this_user.zipcode }}</li>
+    </ul>
+
+    <h2>User ratings</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Movie title</th>
+            <th>Rating (out of 5)</th>
+        </tr>
+    {% for item in this_user_ratings %}
+        <tr>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[1] }}</td>
+        </tr>
+    {% endfor %}
+
+    </table>
+
+{% endblock %}
+

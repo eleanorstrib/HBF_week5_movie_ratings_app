@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% block body %}
+    
+
+    <h2>Movie Listings</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Movie title</th>
+            <th>URL</th>
+        </tr>
+    {% for item in movie_info %}
+        <tr>
+            <td><a href=/moviedetail/{{ item[0]}}>{{ item[1] }}</a></td>
+            <td><a href={{ item[2] }}>Link</a></td>
+        </tr>
+    {% endfor %}
+
+    </table>
+
+{% endblock %}
+
