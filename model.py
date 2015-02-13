@@ -2,6 +2,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
+import correlation
 
 engine = create_engine("sqlite:///ratings.db", echo=True)
 session = scoped_session(sessionmaker(bind=engine,
@@ -23,7 +24,21 @@ class User(Base):
     def __repr__(self):
         """Cleanly show info about self """
         return "<User id=%d email=%s password=%s age=%d zipcode=%s>" % (self.id, self.email, self.password, self.age, self.zipcode)
-### End class declarations
+"""
+    Coding we didn't complete yet -- machine learning stuff in pseudocode
+
+    1 - define a function in the User class pass in the self(user) and other users
+    2 - create an empty dict to store our ratings
+    3 - make an empty list for our pair rating tuples
+    4 - loop through all current user ratings
+            append to dict with movie id as the key, rating as value
+    5 - Loop through all other user ratings
+    6 - check in user dict if key for movie id exists
+    7 - if the key exists, append a tuple with (user rating, other rating) to empty list
+    8 - if any value in paired ratings run the peason correlation 
+    9 - otherwise, return 0
+
+"""
 
 class Movie(Base): 
     __tablename__ = "Movies"

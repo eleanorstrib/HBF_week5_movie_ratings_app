@@ -51,9 +51,29 @@ def show_movie_listings():
 @app.route("/moviedetail/<int:id>")
 def get_movie_details(id):
     movie_info = model.session.query(model.Movie.title, model.Movie.rel_date, model.Movie.url, model.Movie.id).filter(model.Movie.id==id).all()
-    print movie_info
+    print "movie info" , movie_info
     movie_date = (movie_info[0][1]).strftime("%B %d, %Y")
-    print movie_date
+    print "movie date" , movie_date
+    user_idnum = f_sess['client'][1]
+    print "user id num", user_idnum
+    rating_check = model.session.query(model.Rating).filter(model.Rating.movie_id == id, model.Rating.user_id == user_idnum).all()
+    print "rating_check" , rating_check
+
+    if rating_check == []:    # if the user did not rate the movie
+        print "You did not rate this movie!!"
+        other_user_ratings = model.session.query(model.Rating.user_id, model.Rating.rating).filter(model.Rating.movie_id == id).all()
+        other_users = []
+        for item in other_user_ratings:
+            other_users.append(item[0])
+        
+        print "other user ratings:", other_user_ratings
+        print "list of other users", other_users
+    else:
+        print "You rated this movie already!"
+        
+        # if rating exists, show their rating
+        # if it doesnt, predict rating 
+
     return render_template("movie_detail.html", movie_info=movie_info, movie_date=movie_date)
 
 @app.route("/addrating/<int:id>", methods=["POST"])
